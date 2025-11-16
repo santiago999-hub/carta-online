@@ -1,0 +1,94 @@
+<mat-toolbar color="primary" class="toolbar-header">
+  <button mat-icon-button (click)="goBack()" class="btn-back">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <div class="empresa-info">
+    <img *ngIf="empresa?.logoUrl" [src]="empresa?.logoUrl" alt="Logo" class="logo" />
+    <div>
+      <h1 class="empresa-name">{{ empresa?.name || 'Carta Menú' }}</h1>
+      <p class="empresa-subtitle" *ngIf="empresa?.address">{{ empresa?.address }}</p>
+    </div>
+  </div>
+  <span class="spacer"></span>
+  <button
+    mat-icon-button
+    [matBadge]="cantidadCarrito"
+    matBadgeColor="accent"
+    matBadgeSize="large"
+    [matBadgeHidden]="cantidadCarrito === 0"
+    (click)="irAlCarrito()"
+    class="btn-carrito"
+    matTooltip="Ver carrito"
+  >
+    <mat-icon>shopping_cart</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div class="container" *ngIf="!cargando">
+  <div *ngIf="!empresa" class="no-encontrada">
+    <mat-card class="error-card">
+      <mat-card-title>Empresa no encontrada</mat-card-title>
+      <mat-card-content>
+        <p>No pudimos encontrar la empresa solicitada. Intenta nuevamente desde el menú principal.</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div *ngIf="empresa && categorias.length === 0" class="sin-productos">
+    <mat-card class="info-card">
+      <mat-card-title>Sin productos disponibles</mat-card-title>
+      <mat-card-content>
+        <p>Esta empresa aún no tiene productos registrados.</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div *ngFor="let categoria of categorias; let last = last" class="categoria-section">
+    <div class="categoria-header">
+      <h2 class="categoria-title">{{ categoria.name }}</h2>
+      <div class="producto-count">{{ categoria.productos.length }} producto(s)</div>
+    </div>
+
+    <div class="productos-grid">
+      <mat-card *ngFor="let producto of categoria.productos" class="producto-card">
+        <div class="producto-image-container" *ngIf="producto.imageUrl">
+          <img [src]="producto.imageUrl" alt="{{ producto.name }}" class="producto-image" />
+        </div>
+        <div class="producto-image-placeholder" *ngIf="!producto.imageUrl">
+          <mat-icon>fastfood</mat-icon>
+        </div>
+
+        <mat-card-header class="producto-header">
+          <mat-card-title class="producto-nombre">{{ producto.name }}</mat-card-title>
+          <div class="producto-precio">{{ producto.price | currency: 'ARS' }}</div>
+        </mat-card-header>
+
+        <mat-card-content class="producto-content">
+          <p class="producto-descripcion" *ngIf="producto.description">
+            {{ producto.description }}
+          </p>
+        </mat-card-content>
+
+        <mat-card-actions class="producto-actions">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="agregarAlCarrito(producto)"
+            class="btn-agregar"
+          >
+            <mat-icon>add_shopping_cart</mat-icon>
+            Agregar
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+    <mat-divider *ngIf="!last" class="categoria-divider"></mat-divider>
+  </div>
+</div>
+
+<div *ngIf="cargando" class="cargando">
+  <div class="spinner"></div>
+  <p>Cargando menú...</p>
+</div>
+

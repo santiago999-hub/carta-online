@@ -1,0 +1,46 @@
+<div class="categorias-container">
+  <div class="toolbar">
+    <h2>Categorías</h2>
+    <div class="actions">
+      <mat-form-field appearance="fill">
+        <mat-label>Empresa</mat-label>
+        <mat-select [(ngModel)]="selectedCompanyId" (selectionChange)="onCompanyChange()">
+          <mat-option [value]="null">Todas</mat-option>
+          <mat-option *ngFor="let e of empresas" [value]="e.id">{{e.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Buscar</mat-label>
+        <input matInput [(ngModel)]="filter" (ngModelChange)="load()" placeholder="Nombre" />
+      </mat-form-field>
+
+      <button mat-flat-button color="primary" (click)="openDialog()">Nueva categoría</button>
+    </div>
+  </div>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>Id</th>
+      <td mat-cell *matCellDef="let c">{{c.id}}</td>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Nombre</th>
+      <td mat-cell *matCellDef="let c">{{c.name}}</td>
+    </ng-container>
+    <ng-container matColumnDef="company">
+      <th mat-header-cell *matHeaderCellDef>Empresa</th>
+      <td mat-cell *matCellDef="let c">{{getNombreEmpresa(c.companyId)}}</td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Acciones</th>
+      <td mat-cell *matCellDef="let c">
+        <button mat-icon-button color="primary" (click)="openDialog(c)"><mat-icon>edit</mat-icon></button>
+        <button mat-icon-button color="warn" (click)="delete(c.id)"><mat-icon>delete</mat-icon></button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

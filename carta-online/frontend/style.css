@@ -1,0 +1,67 @@
+/* style.css - Diseño moderno, pastel, responsive */
+:root{
+  --bg: #fbf9ff;
+  --card: #ffffff;
+  --muted: #7a7a85;
+  --accent: #9ad3bc; /* verde pastel */
+  --accent-2: #ffd6a5; /* naranja pastel */
+  --radius: 12px;
+  --gap: 16px;
+  --max-width: 980px;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: linear-gradient(180deg, #f7f3ff 0%, var(--bg) 100%);
+  color:#222;
+  -webkit-font-smoothing:antialiased;
+}
+.container{
+  max-width:var(--max-width);
+  margin:32px auto;
+  padding:16px;
+}
+h1{ margin:0 0 12px 0; font-size:1.8rem }
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow: 0 6px 18px rgba(77,66,111,0.06);
+  padding:16px;
+  margin-bottom:18px;
+}
+.form-card h2, .table-card h2{ margin:0 0 12px 0 }
+
+/* Form layout */
+form{ display:flex; flex-wrap:wrap; gap:12px }
+.field{ display:flex; flex-direction:column; gap:8px; flex:1 1 220px; min-width:200px }
+.field span{ font-size:0.85rem; color:var(--muted) }
+input[type="text"], input[type="number"], select{
+  height:44px;
+  padding:10px 12px;
+  border-radius:10px;
+  border:1px solid rgba(0,0,0,0.08);
+  background: #fff;
+  font-size:1rem;
+}
+input::placeholder{ color: #c9c7cf }
+
+.actions{ display:flex; gap:12px; align-items:center; margin-top:6px }
+.btn{ padding:10px 14px; border-radius:10px; border:0; cursor:pointer; background:transparent }
+.btn.primary{ background:var(--accent); color:#0b2f24; font-weight:600 }
+.btn:hover{ opacity:0.95 }
+
+/* Table */
+.table-wrap{ overflow:auto }
+table{ width:100%; border-collapse:collapse; min-width:640px }
+thead th{ text-align:left; padding:10px 12px; font-size:0.9rem; color:var(--muted) }
+tbody td{ padding:12px; border-top:1px solid rgba(0,0,0,0.04) }
+tbody tr:hover{ background: linear-gradient(90deg, rgba(154,211,188,0.06), rgba(255,214,165,0.04)) }
+
+/* Responsive */
+@media (max-width:720px){
+  .container{ padding:10px }
+  form{ flex-direction:column }
+  .field{ min-width:unset }
+}

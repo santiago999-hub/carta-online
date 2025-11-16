@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Payments - Demo Frontend</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <h1>Registro de Pagos</h1>
+
+    <section class="card form-card">
+      <h2>Nuevo Pago</h2>
+      <form id="paymentForm">
+        <label class="field">
+          <span>Nombre del cliente</span>
+          <input id="customerName" name="customerName" type="text" required placeholder="Ej. Juan Pérez" />
+        </label>
+
+        <label class="field">
+          <span>Producto</span>
+          <input id="item" name="item" type="text" required placeholder="Ej. Pedido #123" />
+        </label>
+
+        <label class="field">
+          <span>Monto (ARS)</span>
+          <input id="amount" name="amount" type="number" step="0.01" min="0" required placeholder="Ej. 1500.00" />
+        </label>
+
+        <label class="field">
+          <span>Estado</span>
+          <select id="status" name="status" required>
+            <option value="Pending">Pendiente</option>
+            <option value="Paid">Pagado</option>
+            <option value="Failed">Fallido</option>
+          </select>
+        </label>
+
+        <div class="actions">
+          <button type="submit" class="btn primary">Registrar Pago</button>
+          <button type="button" id="btnReset" class="btn">Limpiar</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card table-card">
+      <h2>Pagos Registrados</h2>
+      <div class="table-wrap">
+        <table id="paymentsTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Producto</th>
+              <th>Monto</th>
+              <th>Fecha</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- filas generadas por JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

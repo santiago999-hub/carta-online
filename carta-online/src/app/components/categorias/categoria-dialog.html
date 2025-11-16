@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>{{ form.value.id ? 'Editar categoría' : 'Nueva categoría' }}</h2>
+<div mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field appearance="fill" style="width:100%">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width:100%">
+      <mat-label>Empresa</mat-label>
+      <mat-select formControlName="companyId">
+        <mat-option *ngFor="let e of empresas" [value]="e.id">{{e.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions style="justify-content:flex-end; gap:0.5rem;">
+  <button mat-button (click)="cancel()">Cancelar</button>
+  <button mat-flat-button color="primary" (click)="save()">Guardar</button>
+</div>

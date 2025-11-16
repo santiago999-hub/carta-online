@@ -1,0 +1,37 @@
+<div class="productos-container">
+  <div class="toolbar">
+    <h2>Productos</h2>
+    <div class="actions">
+      <mat-form-field appearance="fill" style="width:200px">
+        <mat-label>Empresa</mat-label>
+        <mat-select [(ngModel)]="selectedCompanyId" (selectionChange)="onCompanyChange()">
+          <mat-option [value]="null">Todas</mat-option>
+          <mat-option *ngFor="let e of empresas" [value]="e.id">{{e.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Buscar</mat-label>
+        <input matInput [(ngModel)]="filter" (ngModelChange)="load()" placeholder="Nombre o descripción" />
+      </mat-form-field>
+
+      <button mat-flat-button color="primary" (click)="openDialog()">Nuevo producto</button>
+    </div>
+  </div>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
+    <ng-container matColumnDef="id"><th mat-header-cell *matHeaderCellDef>Id</th><td mat-cell *matCellDef="let p">{{p.id}}</td></ng-container>
+    <ng-container matColumnDef="name"><th mat-header-cell *matHeaderCellDef>Nombre</th><td mat-cell *matCellDef="let p">{{p.name}}</td></ng-container>
+    <ng-container matColumnDef="price"><th mat-header-cell *matHeaderCellDef>Precio</th><td mat-cell *matCellDef="let p">{{p.price | currency:'ARS'}}</td></ng-container>
+    <ng-container matColumnDef="category"><th mat-header-cell *matHeaderCellDef>Categoria</th><td mat-cell *matCellDef="let p">{{getNombreCategoria(p.categoryId)}}</td></ng-container>
+    <ng-container matColumnDef="company"><th mat-header-cell *matHeaderCellDef>Empresa</th><td mat-cell *matCellDef="let p">{{getNombreEmpresa(p.companyId)}}</td></ng-container>
+    <ng-container matColumnDef="actions"><th mat-header-cell *matHeaderCellDef>Acciones</th><td mat-cell *matCellDef="let p">
+      <button mat-icon-button color="primary" (click)="openDialog(p)"><mat-icon>edit</mat-icon></button>
+      <button mat-icon-button color="warn" (click)="delete(p.id)"><mat-icon>delete</mat-icon></button>
+    </td></ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+<p>productos works!</p>

@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>{{ form.value.id ? 'Editar producto' : 'Nuevo producto' }}</h2>
+<div mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field appearance="fill" style="width:100%"><mat-label>Nombre</mat-label><input matInput formControlName="name" /></mat-form-field>
+    <mat-form-field appearance="fill" style="width:100%"><mat-label>Descripción</mat-label><input matInput formControlName="description" /></mat-form-field>
+    <mat-form-field appearance="fill" style="width:100%"><mat-label>Precio</mat-label><input matInput type="number" formControlName="price" /></mat-form-field>
+
+    <mat-form-field appearance="fill" style="width:100%">
+      <mat-label>Empresa</mat-label>
+      <mat-select formControlName="companyId" (selectionChange)="onCompanyChange()">
+        <mat-option *ngFor="let e of empresas" [value]="e.id">{{e.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width:100%">
+      <mat-label>Categoría</mat-label>
+      <mat-select formControlName="categoryId">
+        <mat-option *ngFor="let c of categorias" [value]="c.id">{{c.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width:100%"><mat-label>Imagen URL</mat-label><input matInput formControlName="imageUrl" /></mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions style="justify-content:flex-end; gap:0.5rem;"><button mat-button (click)="cancel()">Cancelar</button><button mat-flat-button color="primary" (click)="save()">Guardar</button></div>

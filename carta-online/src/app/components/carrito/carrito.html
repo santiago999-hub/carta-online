@@ -1,0 +1,158 @@
+<div class="carrito-container">
+  <!-- Header -->
+  <div class="carrito-header">
+    <h1>🛒 Mi Carrito</h1>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="continuarComprando()"
+      class="btn-volver"
+    >
+      <mat-icon>arrow_back</mat-icon>
+      Volver al menú
+    </button>
+  </div>
+
+  <!-- Carrito vacío -->
+  <div *ngIf="items.length === 0" class="carrito-vacio">
+    <mat-card class="empty-card">
+      <mat-card-title>Tu carrito está vacío</mat-card-title>
+      <mat-card-content>
+        <p>Agrega productos desde nuestro menú</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="continuarComprando()">
+          <mat-icon>shopping_cart</mat-icon>
+          Ir al menú
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <!-- Carrito con items -->
+  <div *ngIf="items.length > 0" class="carrito-contenido">
+    <!-- Tabla de productos -->
+    <mat-card class="tabla-card">
+      <mat-card-header>
+        <mat-card-title>Productos en tu carrito</mat-card-title>
+        <button
+          mat-icon-button
+          color="warn"
+          (click)="vaciarCarrito()"
+          class="btn-vaciar"
+          matTooltip="Vaciar carrito"
+        >
+          <mat-icon>delete_sweep</mat-icon>
+        </button>
+      </mat-card-header>
+
+      <mat-card-content>
+        <table mat-table [dataSource]="items" class="carrito-table">
+          <!-- Producto Column -->
+          <ng-container matColumnDef="producto">
+            <th mat-header-cell>Producto</th>
+            <td mat-cell *matCellDef="let element">{{ element.productoNombre }}</td>
+          </ng-container>
+
+          <!-- Precio Column -->
+          <ng-container matColumnDef="precio">
+            <th mat-header-cell>Precio</th>
+            <td mat-cell *matCellDef="let element">{{ element.precio | currency: 'ARS' }}</td>
+          </ng-container>
+
+          <!-- Cantidad Column -->
+          <ng-container matColumnDef="cantidad">
+            <th mat-header-cell>Cantidad</th>
+            <td mat-cell *matCellDef="let element">
+              <mat-form-field appearance="fill" class="cantidad-field">
+                <input
+                  matInput
+                  type="number"
+                  [value]="element.cantidad"
+                  (input)="actualizarCantidad(element, $any($event.target).valueAsNumber || Number($any($event.target).value))"
+                  min="1"
+                />
+              </mat-form-field>
+            </td>
+          </ng-container>
+
+          <!-- Subtotal Column -->
+          <ng-container matColumnDef="subtotal">
+            <th mat-header-cell>Subtotal</th>
+            <td mat-cell class="subtotal" *matCellDef="let element">
+              {{ obtenerSubtotal(element) | currency: 'ARS' }}
+            </td>
+          </ng-container>
+
+          <!-- Acciones Column -->
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell>Acciones</th>
+            <td mat-cell *matCellDef="let element">
+              <button
+                mat-icon-button
+                color="warn"
+                (click)="eliminarItem(element.id)"
+                matTooltip="Eliminar"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let element; columns: displayedColumns"></tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Resumen y acciones -->
+    <div class="resumen-section">
+      <!-- Resumen de compra -->
+      <mat-card class="resumen-card">
+        <mat-card-header>
+          <mat-card-title>Resumen de compra</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content class="resumen-content">
+          <div class="resumen-item">
+            <span>Subtotal:</span>
+            <span>{{ total | currency: 'ARS' }}</span>
+          </div>
+
+          <div class="resumen-item">
+            <span>Envío:</span>
+            <span class="envio-gratis">Gratis</span>
+          </div>
+
+          <mat-divider></mat-divider>
+
+          <div class="resumen-total">
+            <span>Total:</span>
+            <span class="total-amount">{{ total | currency: 'ARS' }}</span>
+          </div>
+        </mat-card-content>
+
+        <mat-card-actions class="acciones-compra">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="finalizarCompra()"
+            class="btn-comprar"
+          >
+            <mat-icon>check_circle</mat-icon>
+            Finalizar compra
+          </button>
+          <button
+            mat-stroked-button
+            color="primary"
+            (click)="continuarComprando()"
+            class="btn-continuar"
+          >
+            <mat-icon>add_shopping_cart</mat-icon>
+            Seguir comprando
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
