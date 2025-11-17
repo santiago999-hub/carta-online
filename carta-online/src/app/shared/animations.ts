@@ -49,10 +49,10 @@ export const scaleIn = trigger('scaleIn', [
 export const cardAnimation = trigger('cardAnimation', [
   transition(':enter', [
     style({ 
-      transform: 'translateY(30px) scale(0.95)', 
+      transform: 'translateY(40px) scale(0.9)', 
       opacity: 0 
     }),
-    animate('500ms cubic-bezier(0.35, 0, 0.25, 1)', 
+    animate('600ms cubic-bezier(0.34, 1.56, 0.64, 1)', 
       style({ 
         transform: 'translateY(0) scale(1)', 
         opacity: 1 

@@ -17,7 +17,36 @@
     </div>
   </div>
 
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
+  <div class="welcome-message" *ngIf="dataSource.data.length === 0 && !filter">
+    <div class="welcome-content">
+      <mat-icon class="welcome-icon">business_center</mat-icon>
+      <h2>¡Bienvenido a Carta Online! 🍽️</h2>
+      <p class="welcome-text">Sistema de gestión multiempresa para menús digitales</p>
+      <p class="welcome-description">
+        Comienza creando tu primera empresa para gestionar categorías, productos y publicar tu carta digital.
+      </p>
+      <button mat-raised-button color="primary" (click)="openDialog()" class="welcome-btn">
+        <mat-icon>add_business</mat-icon>
+        Crear Mi Primera Empresa
+      </button>
+      <div class="welcome-features">
+        <div class="feature">
+          <mat-icon>restaurant_menu</mat-icon>
+          <span>Gestión de Productos</span>
+        </div>
+        <div class="feature">
+          <mat-icon>category</mat-icon>
+          <span>Organización por Categorías</span>
+        </div>
+        <div class="feature">
+          <mat-icon>public</mat-icon>
+          <span>Carta Pública Digital</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z2" *ngIf="dataSource.data.length > 0 || filter">
 
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> Id </th>

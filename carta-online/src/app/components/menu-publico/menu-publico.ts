@@ -184,4 +184,8 @@ export class MenuPublicoComponent implements OnInit {
   volver(): void {
     this.router.navigate(['/empresas']);
   }
+
+  volverInicio(): void {
+    this.router.navigate(['/']);
+  }
 }
