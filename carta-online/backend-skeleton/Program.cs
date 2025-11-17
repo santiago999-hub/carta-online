@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using CartaOnline.Backend;
 
-var builder = WebApplicationBuilder.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 
 // ========== SERVICIOS ==========
 

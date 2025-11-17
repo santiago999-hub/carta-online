@@ -12,6 +12,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSelectModule } from '@angular/material/select';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { FormsModule } from '@angular/forms';
 import { EmpresaService } from '../../services/empresa.service';
 import { CategoriaService } from '../../services/categoria.service';
 import { ProductoService } from '../../services/producto.service';
@@ -19,12 +20,14 @@ import { CarritoService } from '../../services/carrito.service';
 import { Empresa } from '../../models/empresa.model';
 import { Categoria } from '../../models/categoria.model';
 import { Producto } from '../../models/producto.model';
+import { fadeIn, cardAnimation, listAnimation, scaleIn } from '../../shared/animations';
 
 @Component({
   selector: 'app-menu-publico',
   standalone: true,
   imports: [
     CommonModule,
+    FormsModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
@@ -39,6 +42,7 @@ import { Producto } from '../../models/producto.model';
   ],
   templateUrl: './menu-publico.html',
   styleUrls: ['./menu-publico.css'],
+  animations: [fadeIn, cardAnimation, listAnimation, scaleIn]
 })
 export class MenuPublicoComponent implements OnInit {
   companyId: number | null = null;
@@ -168,6 +172,13 @@ export class MenuPublicoComponent implements OnInit {
     if (!this.companyId) return;
     this.carritoService.agregarAlCarrito(producto.id, producto.name, producto.price, this.companyId, 1);
     this.snackBar.open(`${producto.name} agregado al carrito`, 'Cerrar', { duration: 2000 });
+  }
+
+  limpiarFiltros(): void {
+    this.search = '';
+    this.selectedCategoriaId = null;
+    this.sortOrder = '';
+    this.applyFilters();
   }
 
   volver(): void {

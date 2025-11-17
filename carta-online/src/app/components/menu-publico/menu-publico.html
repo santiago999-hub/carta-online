@@ -1,22 +1,38 @@
 <mat-toolbar color="primary" class="menu-toolbar">
   <div class="toolbar-left">
-    <button mat-icon-button (click)="volver()"><mat-icon>arrow_back</mat-icon></button>
+    <button mat-mini-fab color="accent" (click)="volver()" matTooltip="Volver" class="back-btn">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
     <img *ngIf="empresa?.logoUrl" [src]="empresa?.logoUrl" alt="logo" class="logo-img" />
-    <span class="empresa-nombre">{{ empresa?.name || 'Carta' }}</span>
+    <div class="empresa-info">
+      <span class="empresa-nombre">{{ empresa?.name || 'Carta' }}</span>
+      <span class="empresa-subtitulo">Menú Digital</span>
+    </div>
   </div>
   <div class="toolbar-right">
-    <mat-form-field appearance="fill" class="search-field">
-      <mat-label>Buscar</mat-label>
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Buscar productos</mat-label>
       <input matInput placeholder="Buscar producto" [(ngModel)]="search" (input)="applyFilters()" />
+      <mat-icon matPrefix>search</mat-icon>
     </mat-form-field>
-    <mat-form-field appearance="fill" class="sort-field">
-      <mat-select placeholder="Orden" [(value)]="sortOrder" (selectionChange)="applyFilters()">
-        <mat-option value="">--</mat-option>
-        <mat-option value="asc">Precio ↑</mat-option>
-        <mat-option value="desc">Precio ↓</mat-option>
+    <mat-form-field appearance="outline" class="sort-field">
+      <mat-label>Ordenar</mat-label>
+      <mat-select [(value)]="sortOrder" (selectionChange)="applyFilters()">
+        <mat-option value="">Por defecto</mat-option>
+        <mat-option value="asc">
+          <mat-icon>arrow_upward</mat-icon>
+          Precio menor
+        </mat-option>
+        <mat-option value="desc">
+          <mat-icon>arrow_downward</mat-icon>
+          Precio mayor
+        </mat-option>
       </mat-select>
+      <mat-icon matPrefix>sort</mat-icon>
     </mat-form-field>
-    <button mat-icon-button (click)="volver()" matTooltip="Volver al menú principal"><mat-icon>home</mat-icon></button>
+    <button mat-mini-fab color="accent" (click)="volver()" matTooltip="Inicio" class="home-btn">
+      <mat-icon>home</mat-icon>
+    </button>
   </div>
 </mat-toolbar>
 
@@ -33,28 +49,52 @@
       <span>Productos encontrados: <strong>{{ productosFiltrados.length }}</strong></span>
     </div>
 
-    <div *ngIf="productosFiltrados.length === 0">
-      <mat-card>
-        <mat-card-title>Esta empresa aún no tiene productos disponibles</mat-card-title>
-        <mat-card-content>Aún no hay productos cargados para esta empresa.</mat-card-content>
+    <div *ngIf="productosFiltrados.length === 0" class="empty-state" @fadeIn>
+      <mat-card class="empty-state-card" @scaleIn>
+        <div class="empty-icon">
+          <mat-icon>restaurant</mat-icon>
+        </div>
+        <mat-card-title>No se encontraron productos</mat-card-title>
+        <mat-card-content>
+          <p *ngIf="search || selectedCategoriaId">Intentá con otros filtros de búsqueda</p>
+          <p *ngIf="!search && !selectedCategoriaId">Esta empresa aún no tiene productos disponibles</p>
+        </mat-card-content>
+        <mat-card-actions *ngIf="search || selectedCategoriaId">
+          <button mat-raised-button color="primary" (click)="limpiarFiltros()">
+            <mat-icon>clear</mat-icon>
+            Limpiar filtros
+          </button>
+        </mat-card-actions>
       </mat-card>
     </div>
 
-    <div *ngFor="let categoriaName of (Object.keys(agrupadoPorCategoria) || [])">
+    <div *ngFor="let entry of (agrupadoPorCategoria | keyvalue)">
       <mat-divider></mat-divider>
-      <h3 class="categoria-title">{{ categoriaName }}</h3>
+      <h3 class="categoria-title">{{ entry.key }}</h3>
 
       <div class="grid">
-        <mat-card class="product-card" *ngFor="let p of agrupadoPorCategoria[categoriaName]">
-          <img *ngIf="p.imageUrl" [src]="p.imageUrl" class="product-img" alt="{{p.name}}" />
-          <mat-card-title>{{ p.name }}</mat-card-title>
-          <mat-card-content>
-            <p class="desc">{{ p.description }}</p>
-            <p class="price">{{ p.price | currency:'ARS' }}</p>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-stroked-button color="primary" (click)="agregarAlCarrito(p)">Agregar</button>
-          </mat-card-actions>
+        <mat-card class="product-card" *ngFor="let p of entry.value" @cardAnimation>
+          <div class="card-image-container">
+            <img *ngIf="p.imageUrl" [src]="p.imageUrl" class="product-img" alt="{{p.name}}" />
+            <div *ngIf="!p.imageUrl" class="product-img-placeholder">
+              <mat-icon>restaurant</mat-icon>
+            </div>
+          </div>
+          <div class="card-content">
+            <mat-card-title class="product-name">{{ p.name }}</mat-card-title>
+            <mat-card-content>
+              <p class="desc">{{ p.description }}</p>
+              <div class="price-container">
+                <span class="price">{{ p.price | currency:'ARS':'symbol-narrow':'1.0-0' }}</span>
+              </div>
+            </mat-card-content>
+            <mat-card-actions class="card-actions">
+              <button mat-raised-button color="primary" (click)="agregarAlCarrito(p)" class="add-to-cart-btn">
+                <mat-icon>add_shopping_cart</mat-icon>
+                Agregar al Carrito
+              </button>
+            </mat-card-actions>
+          </div>
         </mat-card>
       </div>
     </div>

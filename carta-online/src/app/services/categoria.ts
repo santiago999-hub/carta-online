@@ -1,8 +1,3 @@
-import { Injectable } from '@angular/core';
-
-@Injectable({
-  providedIn: 'root',
-})
-export class Categoria {
-  
-}
+// Archivo obsoleto. No usar este servicio.
+// El servicio real es `categoria.service.ts` y el modelo es `models/categoria.model.ts`.
+export {};

@@ -8,6 +8,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ProductoService } from '../../services/producto.service';
 import { CategoriaService } from '../../services/categoria.service';
 import { EmpresaService } from '../../services/empresa.service';
@@ -19,7 +21,7 @@ import { ProductoDialog } from './producto-dialog';
 @Component({
   selector: 'app-productos',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, FormsModule, MatSelectModule],
+  imports: [CommonModule, MatTableModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, FormsModule, MatSelectModule, MatTooltipModule, MatSnackBarModule],
   templateUrl: './productos.html',
   styleUrls: ['./productos.css']
 })
@@ -31,7 +33,7 @@ export class Productos implements OnInit {
   selectedCompanyId: number | null = null;
   filter = '';
 
-  constructor(private productoService: ProductoService, private categoriaService: CategoriaService, private empresaService: EmpresaService, private dialog: MatDialog) {}
+  constructor(private productoService: ProductoService, private categoriaService: CategoriaService, private empresaService: EmpresaService, private dialog: MatDialog, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.empresas = this.empresaService.getAll();
@@ -67,12 +69,22 @@ export class Productos implements OnInit {
     const ref = this.dialog.open(ProductoDialog, { data: producto ? { ...producto } : null, width: '500px' });
     ref.afterClosed().subscribe(result => {
       if (!result) return;
-      if (result.id) this.productoService.update(result);
-      else this.productoService.create(result);
+      if (result.id) {
+        this.productoService.update(result);
+        this.snackBar.open('✅ Producto actualizado exitosamente', 'Cerrar', { duration: 3000, horizontalPosition: 'end', verticalPosition: 'top' });
+      } else {
+        this.productoService.create(result);
+        this.snackBar.open('✅ Producto creado exitosamente', 'Cerrar', { duration: 3000, horizontalPosition: 'end', verticalPosition: 'top' });
+      }
       this.load();
     });
   }
 
-  delete(id: number) { if (!confirm('¿Eliminar producto?')) return; this.productoService.delete(id); this.load(); }
+  delete(id: number) { 
+    if (!confirm('¿Eliminar producto? Esta acción no se puede deshacer.')) return; 
+    this.productoService.delete(id); 
+    this.snackBar.open('🗑️ Producto eliminado', 'Cerrar', { duration: 3000, horizontalPosition: 'end', verticalPosition: 'top' });
+    this.load(); 
+  }
 }
 

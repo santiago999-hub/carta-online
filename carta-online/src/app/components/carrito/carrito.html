@@ -1,7 +1,10 @@
 <div class="carrito-container">
   <!-- Header -->
   <div class="carrito-header">
-    <h1>🛒 Mi Carrito</h1>
+    <div class="header-left">
+      <mat-icon class="cart-icon">shopping_cart</mat-icon>
+      <h1>Mi Carrito de Compras</h1>
+    </div>
     <button
       mat-raised-button
       color="primary"
@@ -9,30 +12,34 @@
       class="btn-volver"
     >
       <mat-icon>arrow_back</mat-icon>
-      Volver al menú
+      Continuar Comprando
     </button>
   </div>
 
   <!-- Carrito vacío -->
-  <div *ngIf="items.length === 0" class="carrito-vacio">
-    <mat-card class="empty-card">
+  <div *ngIf="items.length === 0" class="carrito-vacio" @fadeIn>
+    <mat-card class="empty-card" @scaleIn>
+      <div class="empty-icon">
+        <mat-icon>shopping_cart</mat-icon>
+      </div>
       <mat-card-title>Tu carrito está vacío</mat-card-title>
       <mat-card-content>
-        <p>Agrega productos desde nuestro menú</p>
+        <p>¡Todavía no hay productos aquí!</p>
+        <p class="subtitle">Explorá nuestro menú y agregá tus platos favoritos</p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-raised-button color="primary" (click)="continuarComprando()">
-          <mat-icon>shopping_cart</mat-icon>
-          Ir al menú
+        <button mat-raised-button color="primary" (click)="continuarComprando()" class="btn-explorar">
+          <mat-icon>restaurant_menu</mat-icon>
+          Explorar menú
         </button>
       </mat-card-actions>
     </mat-card>
   </div>
 
   <!-- Carrito con items -->
-  <div *ngIf="items.length > 0" class="carrito-contenido">
+  <div *ngIf="items.length > 0" class="carrito-contenido" @fadeIn>
     <!-- Tabla de productos -->
-    <mat-card class="tabla-card">
+    <mat-card class="tabla-card" @slideUp>
       <mat-card-header>
         <mat-card-title>Productos en tu carrito</mat-card-title>
         <button
@@ -69,7 +76,7 @@
                   matInput
                   type="number"
                   [value]="element.cantidad"
-                  (input)="actualizarCantidad(element, $any($event.target).valueAsNumber || Number($any($event.target).value))"
+                  (input)="actualizarCantidad(element, ($any($event.target).valueAsNumber || +$any($event.target).value))"
                   min="1"
                 />
               </mat-form-field>

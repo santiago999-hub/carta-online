@@ -1,8 +1,4 @@
-import { Injectable } from '@angular/core';
+// Archivo obsoleto. No usar este servicio.
+// El servicio real es `empresa.service.ts` y el modelo es `models/empresa.model.ts`.
+export {};
 
-@Injectable({
-  providedIn: 'root',
-})
-export class Empresa {
-  
-}

@@ -1,18 +1,12 @@
 import { Routes } from '@angular/router';
-import { Empresas } from './components/empresas/empresas';
-import { CartaPublica } from './components/carta-publica/carta-publica';
-import { MenuPublicoComponent } from './components/menu-publico/menu-publico';
-import { Categorias } from './components/categorias/categorias';
-import { Productos } from './components/productos/productos';
-import { CarritoComponent } from './components/carrito/carrito';
 
 export const routes: Routes = [
 	{ path: '', redirectTo: 'empresas', pathMatch: 'full' },
-	{ path: 'empresas', component: Empresas },
-	{ path: 'categorias', component: Categorias },
-	{ path: 'productos', component: Productos },
-	{ path: 'menu/:companyId', component: MenuPublicoComponent },
+	{ path: 'empresas', loadComponent: () => import('./components/empresas/empresas').then(m => m.Empresas) },
+	{ path: 'categorias', loadComponent: () => import('./components/categorias/categorias').then(m => m.Categorias) },
+	{ path: 'productos', loadComponent: () => import('./components/productos/productos').then(m => m.Productos) },
+	{ path: 'menu/:companyId', loadComponent: () => import('./components/menu-publico/menu-publico').then(m => m.MenuPublicoComponent) },
 	// legacy route kept as alias
-	{ path: 'menu/:empresaId', component: MenuPublicoComponent },
-	{ path: 'carrito', component: CarritoComponent },
+	{ path: 'menu/:empresaId', loadComponent: () => import('./components/menu-publico/menu-publico').then(m => m.MenuPublicoComponent) },
+	{ path: 'carrito', loadComponent: () => import('./components/carrito/carrito').then(m => m.CarritoComponent) },
 ];

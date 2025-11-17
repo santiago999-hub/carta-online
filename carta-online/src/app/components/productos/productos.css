@@ -1,4 +1,136 @@
-.productos-container { padding:1rem }
-.toolbar { display:flex; justify-content:space-between; align-items:center; gap:1rem; margin-bottom:1rem }
-.actions { display:flex; gap:0.5rem; align-items:center }
-table { width:100% }
+.productos-container {
+  padding: 40px;
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  min-height: calc(100vh - 80px);
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 32px;
+  background: white;
+  padding: 20px 28px;
+  border-radius: 16px;
+  border: 3px solid #000;
+  box-shadow: 6px 6px 0 rgba(0,0,0,0.25);
+  transition: all 0.3s ease;
+}
+
+.toolbar:hover {
+  transform: translateY(-2px);
+  box-shadow: 8px 8px 0 rgba(0,0,0,0.3);
+}
+
+.toolbar-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.toolbar-icon {
+  font-size: 36px;
+  width: 36px;
+  height: 36px;
+  color: #26c6da;
+  filter: drop-shadow(0 2px 6px rgba(38, 198, 218, 0.5));
+}
+
+.toolbar h2 {
+  color: #e0e0e0;
+  font-weight: 700;
+  margin: 0;
+  font-size: 1.8rem;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+  letter-spacing: 0.5px;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.filter-field {
+  min-width: 220px;
+}
+
+.search-field {
+  min-width: 260px;
+}
+
+.add-btn {
+  height: 48px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-elevation-z2 {
+  border: 3px solid #000 !important;
+  border-radius: 12px !important;
+  overflow: hidden;
+  box-shadow: 6px 6px 0 rgba(0,0,0,0.2) !important;
+  background: white;
+}
+
+.mat-mdc-table {
+  background: white !important;
+}
+
+.mat-mdc-header-row {
+  background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%) !important;
+  height: 64px !important;
+}
+
+.mat-mdc-header-cell {
+  color: white !important;
+  font-weight: 700 !important;
+  font-size: 1rem !important;
+  letter-spacing: 0.5px !important;
+}
+
+.mat-mdc-row {
+  height: 72px !important;
+  transition: all 0.3s ease;
+}
+
+.mat-mdc-row:nth-child(odd) {
+  background: #f0fff9;
+}
+
+.mat-mdc-row:hover {
+  background: #d5f5ec !important;
+  transform: scale(1.01);
+  box-shadow: 0 2px 8px rgba(26, 188, 156, 0.2);
+}
+
+.mat-mdc-cell {
+  padding: 16px 12px !important;
+  font-size: 0.95rem;
+}
+
+.actions-cell {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.action-btn {
+  width: 40px !important;
+  height: 40px !important;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 2px 8px rgba(26, 188, 156, 0.3);
+}
+
+.action-btn:hover {
+  transform: scale(1.1) rotate(5deg);
+  border-color: #26c6da !important;
+  box-shadow: 0 4px 16px rgba(38, 198, 218, 0.5) !important;
+}
