@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of, from } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { Empresa } from '../models/empresa.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class EmpresaService {
   private storageKey = 'empresas';
-  // API base opcional (preparado para backend). Si no se usa, quedan métodos sync de LocalStorage.
-  private readonly apiBase = 'http://localhost:5230/api/companies';
+  private readonly apiBase = `${environment.apiUrl}/companies`;
+  private readonly useBackend = environment.useBackend;
 
   constructor(private http: HttpClient) {
     if (!localStorage.getItem(this.storageKey)) {
@@ -22,26 +24,97 @@ export class EmpresaService {
     }
   }
 
-  // --- LocalStorage (modo offline por defecto) ---
+  // --- LocalStorage helpers ---
   private read(): Empresa[] { return JSON.parse(localStorage.getItem(this.storageKey) || '[]'); }
   private write(items: Empresa[]) { localStorage.setItem(this.storageKey, JSON.stringify(items)); }
   private nextId(): number { const items = this.read(); return items.length ? Math.max(...items.map(i => i.id)) + 1 : 1; }
 
-  getAll(): Empresa[] { return this.read(); }
-  getById(id: number): Empresa | undefined { return this.read().find(e => e.id === id); }
-  create(data: Omit<Empresa, 'id'>): Empresa { const items = this.read(); const it: Empresa = { id: this.nextId(), ...data }; items.push(it); this.write(items); return it; }
-  update(item: Empresa): boolean { const items = this.read(); const idx = items.findIndex(i => i.id === item.id); if (idx === -1) return false; items[idx] = item; this.write(items); return true; }
-  delete(id: number): boolean { const items = this.read(); const idx = items.findIndex(i => i.id === id); if (idx === -1) return false; items.splice(idx, 1); this.write(items); return true; }
+  // --- Métodos principales (soportan LocalStorage y API) ---
+  
+  getAll(): Empresa[] {
+    if (!this.useBackend) {
+      return this.read();
+    }
+    // Si usa backend, usar getAll$() en su lugar
+    return [];
+  }
 
-  // --- Métodos preparados para backend (no usados aún en componentes) ---
-  getAll$(): Observable<Empresa[]> { return this.http.get<Empresa[]>(this.apiBase); }
-  getById$(id: number): Observable<Empresa> { return this.http.get<Empresa>(`${this.apiBase}/${id}`); }
-  create$(data: Omit<Empresa, 'id'>): Observable<Empresa> { return this.http.post<Empresa>(this.apiBase, data); }
-  update$(id: number, data: Omit<Empresa, 'id'>): Observable<Empresa> { return this.http.put<Empresa>(`${this.apiBase}/${id}`, data); }
-  delete$(id: number): Observable<void> { return this.http.delete<void>(`${this.apiBase}/${id}`); }
+  getAll$(): Observable<Empresa[]> {
+    if (this.useBackend) {
+      return this.http.get<Empresa[]>(this.apiBase).pipe(
+        catchError(err => {
+          console.error('Error al obtener empresas:', err);
+          return of([]);
+        })
+      );
+    }
+    return of(this.read());
+  }
 
-  /**
-   * Nota: cuando conectes el backend, cambia las llamadas en componentes a las versiones con $.
-   */
+  getById(id: number): Empresa | undefined {
+    return this.read().find(e => e.id === id);
+  }
+
+  getById$(id: number): Observable<Empresa | undefined> {
+    if (this.useBackend) {
+      return this.http.get<Empresa>(`${this.apiBase}/${id}`).pipe(
+        catchError(() => of(undefined))
+      );
+    }
+    return of(this.getById(id));
+  }
+
+  create(data: Omit<Empresa, 'id'>): Empresa {
+    const items = this.read();
+    const it: Empresa = { id: this.nextId(), ...data };
+    items.push(it);
+    this.write(items);
+    return it;
+  }
+
+  create$(data: Omit<Empresa, 'id'>): Observable<Empresa> {
+    if (this.useBackend) {
+      return this.http.post<Empresa>(this.apiBase, data);
+    }
+    return of(this.create(data));
+  }
+
+  update(item: Empresa): boolean {
+    const items = this.read();
+    const idx = items.findIndex(i => i.id === item.id);
+    if (idx === -1) return false;
+    items[idx] = item;
+    this.write(items);
+    return true;
+  }
+
+  update$(item: Empresa): Observable<boolean> {
+    if (this.useBackend) {
+      return this.http.put<Empresa>(`${this.apiBase}/${item.id}`, item).pipe(
+        map(() => true),
+        catchError(() => of(false))
+      );
+    }
+    return of(this.update(item));
+  }
+
+  delete(id: number): boolean {
+    const items = this.read();
+    const idx = items.findIndex(i => i.id === id);
+    if (idx === -1) return false;
+    items.splice(idx, 1);
+    this.write(items);
+    return true;
+  }
+
+  delete$(id: number): Observable<boolean> {
+    if (this.useBackend) {
+      return this.http.delete<void>(`${this.apiBase}/${id}`).pipe(
+        map(() => true),
+        catchError(() => of(false))
+      );
+    }
+    return of(this.delete(id));
+  }
 }
 

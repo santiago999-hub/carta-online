@@ -16,15 +16,16 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // 2. Controllers
 builder.Services.AddControllers();
 
-// 3. CORS - permitir requests desde el frontend (ajustar origins si es necesario)
+// 3. CORS - permitir requests desde el frontend Angular
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
         policy
-            .AllowAnyOrigin()
+            .WithOrigins("http://localhost:4200", "http://localhost:50596") // Puertos comunes de Angular
             .AllowAnyMethod()
-            .AllowAnyHeader();
+            .AllowAnyHeader()
+            .AllowCredentials();
     });
 });
 
