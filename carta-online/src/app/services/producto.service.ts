@@ -39,8 +39,8 @@ export class ProductoService {
         { id: 19, name: 'Pizza Fugazzeta', description: 'Muzzarella y cebolla caramelizada', price: 5500, categoryId: 6, companyId: 2, imageUrl: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400&h=300&fit=crop' },
         { id: 20, name: 'Pizza Especial', description: 'Jamón, morrones, huevo y aceitunas', price: 6200, categoryId: 6, companyId: 2, imageUrl: 'https://images.unsplash.com/photo-1628840042765-356cda07504e?w=400&h=300&fit=crop' },
         // Pizzería Don Antonio - Empanadas
-        { id: 21, name: 'Empanada de carne', description: 'Carne picada, cebolla y especias', price: 600, categoryId: 7, companyId: 2, imageUrl: 'https://images.unsplash.com/photo-1599974333013-8e6a7fd6d3ae?w=400&h=300&fit=crop' },
-        { id: 22, name: 'Empanada de jamón y queso', description: 'Jamón cocido y queso muzzarella', price: 550, categoryId: 7, companyId: 2, imageUrl: 'https://images.unsplash.com/photo-1632236063730-952c6adafdb3?w=400&h=300&fit=crop' },
+        { id: 21, name: 'Empanada de carne', description: 'Carne picada, cebolla y especias', price: 600, categoryId: 7, companyId: 2, imageUrl: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&h=300&fit=crop' },
+        { id: 22, name: 'Empanada de jamón y queso', description: 'Jamón cocido y queso muzzarella', price: 550, categoryId: 7, companyId: 2, imageUrl: 'https://images.unsplash.com/photo-1623428187969-5da2dcea5ebf?w=400&h=300&fit=crop' },
         { id: 23, name: 'Empanada de pollo', description: 'Pollo desmenuzado con verduras', price: 580, categoryId: 7, companyId: 2, imageUrl: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&h=300&fit=crop' },
         // Pizzería Don Antonio - Pastas
         { id: 24, name: 'Ravioles de ricota', description: 'Con salsa fileto o bolognesa', price: 4200, categoryId: 8, companyId: 2, imageUrl: 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400&h=300&fit=crop' },
@@ -77,11 +77,11 @@ export class ProductoService {
         { id: 45, name: 'Café con leche', description: 'Con leche vaporizada', price: 1500, categoryId: 16, companyId: 4, imageUrl: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=300&fit=crop' },
         { id: 46, name: 'Cappuccino', description: 'Con espuma de leche', price: 1800, categoryId: 16, companyId: 4, imageUrl: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400&h=300&fit=crop' },
         { id: 47, name: 'Café cortado', description: 'Expreso con leche', price: 1300, categoryId: 16, companyId: 4, imageUrl: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=300&fit=crop' },
-        { id: 48, name: 'Lágrima', description: 'Leche con un toque de café', price: 1400, categoryId: 16, companyId: 4, imageUrl: 'https://images.unsplash.com/photo-1534778101976-62847782d213?w=400&h=300&fit=crop' },
+        { id: 48, name: 'Lágrima', description: 'Leche con un toque de café', price: 1400, categoryId: 16, companyId: 4, imageUrl: 'https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?w=400&h=300&fit=crop' },
         // Café del Centro - Medialunas y Facturas
         { id: 49, name: 'Medialunas x3', description: 'De manteca', price: 1200, categoryId: 17, companyId: 4, imageUrl: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=300&fit=crop' },
         { id: 50, name: 'Facturas surtidas x6', description: 'Variedad de facturas', price: 2500, categoryId: 17, companyId: 4, imageUrl: 'https://images.unsplash.com/photo-1612203985729-70726954388c?w=400&h=300&fit=crop' },
-        { id: 51, name: 'Churros x3', description: 'Con azúcar', price: 1500, categoryId: 17, companyId: 4, imageUrl: 'https://images.unsplash.com/photo-1602142456047-21f6bbe6a0dd?w=400&h=300&fit=crop' },
+        { id: 51, name: 'Churros x3', description: 'Con azúcar', price: 1500, categoryId: 17, companyId: 4, imageUrl: 'https://images.unsplash.com/photo-1590248568596-f95e2a5e1e02?w=400&h=300&fit=crop' },
         // Café del Centro - Tostados
         { id: 52, name: 'Tostado simple', description: 'Jamón y queso', price: 2000, categoryId: 18, companyId: 4, imageUrl: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400&h=300&fit=crop' },
         { id: 53, name: 'Tostado especial', description: 'Jamón, queso y tomate', price: 2300, categoryId: 18, companyId: 4, imageUrl: 'https://images.unsplash.com/photo-1553909489-cd47e0907980?w=400&h=300&fit=crop' },
@@ -94,12 +94,12 @@ export class ProductoService {
 
         // Sushi Express - Rolls
         { id: 58, name: 'California Roll', description: '10 piezas - Palta, pepino y kanikama', price: 4500, categoryId: 21, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=400&h=300&fit=crop' },
-        { id: 59, name: 'Philadelphia Roll', description: '10 piezas - Salmón, queso crema y ciboulette', price: 5200, categoryId: 21, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1617196035183-421b4917c92d?w=400&h=300&fit=crop' },
+        { id: 59, name: 'Philadelphia Roll', description: '10 piezas - Salmón, queso crema y ciboulette', price: 5200, categoryId: 21, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=400&h=300&fit=crop' },
         { id: 60, name: 'Spicy Tuna Roll', description: '10 piezas - Atún picante con salsa especial', price: 5500, categoryId: 21, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1563612116625-3012372fccce?w=400&h=300&fit=crop' },
         { id: 61, name: 'Dragon Roll', description: '10 piezas - Langostino, palta y anguila', price: 6200, categoryId: 21, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1580822184713-fc5400e7fe10?w=400&h=300&fit=crop' },
         // Sushi Express - Nigiris
         { id: 62, name: 'Nigiri de salmón', description: '2 piezas', price: 1800, categoryId: 22, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=400&h=300&fit=crop' },
-        { id: 63, name: 'Nigiri de atún', description: '2 piezas', price: 2000, categoryId: 22, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1617196035183-421b4917c92d?w=400&h=300&fit=crop' },
+        { id: 63, name: 'Nigiri de atún', description: '2 piezas', price: 2000, categoryId: 22, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1564489563601-c53cfc451e93?w=400&h=300&fit=crop' },
         { id: 64, name: 'Nigiri de langostino', description: '2 piezas', price: 2200, categoryId: 22, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1534604973900-c43ab4c2e0ab?w=400&h=300&fit=crop' },
         // Sushi Express - Sashimis
         { id: 65, name: 'Sashimi de salmón', description: '8 cortes finos', price: 4800, categoryId: 23, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1580822184713-fc5400e7fe10?w=400&h=300&fit=crop' },
@@ -107,11 +107,11 @@ export class ProductoService {
         { id: 67, name: 'Sashimi mixto', description: 'Salmón y atún - 10 piezas', price: 5800, categoryId: 23, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1559847844-5315695dadae?w=400&h=300&fit=crop' },
         // Sushi Express - Combinados
         { id: 68, name: 'Combo para 1', description: '20 piezas variadas', price: 6500, categoryId: 24, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=400&h=300&fit=crop' },
-        { id: 69, name: 'Combo para 2', description: '40 piezas variadas', price: 12000, categoryId: 24, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1617196035183-421b4917c92d?w=400&h=300&fit=crop' },
+        { id: 69, name: 'Combo para 2', description: '40 piezas variadas', price: 12000, categoryId: 24, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1611143669185-af224c5e3252?w=400&h=300&fit=crop' },
         { id: 70, name: 'Combo Familiar', description: '60 piezas variadas', price: 17500, categoryId: 24, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1583623025817-d180a2221d0a?w=400&h=300&fit=crop' },
         // Sushi Express - Bebidas
         { id: 71, name: 'Té verde japonés', description: 'Caliente', price: 1200, categoryId: 25, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&h=300&fit=crop' },
-        { id: 72, name: 'Sake frío', description: '250ml', price: 3500, categoryId: 25, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1581631068451-d6f8e3d2cd7f?w=400&h=300&fit=crop' }
+        { id: 72, name: 'Sake frío', description: '250ml', price: 3500, categoryId: 25, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400&h=300&fit=crop' }
       ];
       localStorage.setItem(this.storageKey, JSON.stringify(seed));
     }

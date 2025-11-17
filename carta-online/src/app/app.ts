@@ -131,9 +131,9 @@ export class App {
   async verTodosProductos() {
     const module = await import('./components/productos/productos-resumen-dialog');
     this.dialog.open(module.ProductosResumenDialog, { 
-      width: '95vw',
-      maxWidth: '1400px',
-      height: '90vh',
+      width: '98vw',
+      maxWidth: '1800px',
+      height: '92vh',
       panelClass: 'productos-resumen-dialog'
     });
   }

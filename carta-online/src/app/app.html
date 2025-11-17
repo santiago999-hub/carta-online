@@ -13,7 +13,7 @@
         <mat-option *ngFor="let e of empresas" [value]="e.id">{{e.name}}</mat-option>
       </mat-select>
     </mat-form-field>
-    <button mat-raised-button color="accent" (click)="openMenu()" [disabled]="!selectedCompanyId" class="ver-carta-btn">
+    <button mat-raised-button color="accent" (click)="openMenu()" [disabled]="!selectedCompanyId" class="ver-carta-btn" style="display: none;">
       <mat-icon>menu_book</mat-icon>
       Ver Carta
     </button>
@@ -90,7 +90,7 @@
       </div>
       <button mat-menu-item (click)="verTodosProductos()">
         <mat-icon>view_module</mat-icon>
-        <span>Ver todos organizados ({{totalProductos}})</span>
+        <span>Ver Cartas ({{totalProductos}})</span>
       </button>
       <button mat-menu-item routerLink="/productos">
         <mat-icon>list</mat-icon>

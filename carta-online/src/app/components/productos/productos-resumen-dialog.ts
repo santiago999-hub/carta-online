@@ -122,7 +122,7 @@ interface ProductosPorEmpresa {
     .dialog-container {
       display: flex;
       flex-direction: column;
-      max-height: 85vh;
+      max-height: 90vh;
       background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
     }
 
@@ -283,23 +283,25 @@ interface ProductosPorEmpresa {
     }
 
     .chip-productos {
-      background: rgba(255, 167, 38, 0.2) !important;
-      color: #ffa726 !important;
-      font-weight: 600;
-      border: 1px solid #ffa726;
+      background: rgba(255, 167, 38, 0.3) !important;
+      color: #ffffff !important;
+      font-weight: 700;
+      border: 2px solid #ffa726;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
     }
 
     .chip-precio {
-      background: rgba(76, 175, 80, 0.2) !important;
-      color: #66bb6a !important;
-      font-weight: 600;
-      border: 1px solid #66bb6a;
+      background: rgba(76, 175, 80, 0.3) !important;
+      color: #ffffff !important;
+      font-weight: 700;
+      border: 2px solid #66bb6a;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
     }
 
     .productos-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
       padding: 0 8px;
     }
 
@@ -319,7 +321,7 @@ interface ProductosPorEmpresa {
 
     .producto-header {
       position: relative;
-      height: 160px;
+      height: 120px;
       overflow: hidden;
       background: rgba(0, 0, 0, 0.3);
     }
@@ -345,30 +347,30 @@ interface ProductosPorEmpresa {
     }
 
     .producto-img-placeholder mat-icon {
-      font-size: 64px;
-      width: 64px;
-      height: 64px;
+      font-size: 48px;
+      width: 48px;
+      height: 48px;
       color: rgba(0, 229, 255, 0.5);
     }
 
     .producto-body {
-      padding: 16px;
+      padding: 12px;
     }
 
     .producto-nombre {
-      margin: 0 0 8px 0;
-      font-size: 1.1rem;
+      margin: 0 0 6px 0;
+      font-size: 0.95rem;
       font-weight: 700;
       color: #ffffff;
-      line-height: 1.3;
+      line-height: 1.2;
     }
 
     .producto-descripcion {
-      margin: 0 0 12px 0;
-      font-size: 0.85rem;
+      margin: 0 0 8px 0;
+      font-size: 0.75rem;
       color: #b0b0b0;
-      line-height: 1.4;
-      max-height: 40px;
+      line-height: 1.3;
+      max-height: 32px;
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
@@ -380,7 +382,7 @@ interface ProductosPorEmpresa {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding-top: 12px;
+      padding-top: 8px;
       border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
 
@@ -400,7 +402,7 @@ interface ProductosPorEmpresa {
     }
 
     .producto-precio {
-      font-size: 1.3rem;
+      font-size: 1.1rem;
       font-weight: 700;
       color: #66bb6a;
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
