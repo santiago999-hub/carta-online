@@ -275,3 +275,227 @@ table {
     gap: 20px;
   }
 }
+
+/* Estilos para cards de empresas */
+.empresas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 32px;
+  margin-top: 24px;
+}
+
+.empresa-card {
+  background: linear-gradient(135deg, rgba(26, 26, 46, 0.95) 0%, rgba(22, 33, 62, 0.95) 100%) !important;
+  border-radius: 20px !important;
+  border: 3px solid #0f3460 !important;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.empresa-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 16px 48px rgba(0, 229, 255, 0.3);
+  border-color: #00e5ff !important;
+}
+
+.card-banner {
+  position: relative;
+  height: 180px;
+  overflow: hidden;
+}
+
+.banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.empresa-card:hover .banner-img {
+  transform: scale(1.1);
+}
+
+.banner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(15, 52, 96, 0.8) 100%);
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+}
+
+.empresa-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 229, 255, 0.9);
+  color: #1a1a2e;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.empresa-badge mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px 16px;
+  border-bottom: 2px solid rgba(0, 229, 255, 0.2);
+}
+
+.logo-container {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 4px solid #00e5ff;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 229, 255, 0.4);
+  flex-shrink: 0;
+  background: white;
+}
+
+.empresa-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.empresa-title {
+  flex: 1;
+}
+
+.empresa-title h3 {
+  color: #ffffff;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.precio-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #4caf50;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.precio-badge mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.card-content {
+  padding: 20px 24px !important;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  color: #e0e0e0;
+  font-size: 0.9rem;
+}
+
+.info-item mat-icon {
+  color: #00e5ff;
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.stats-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 2px solid rgba(0, 229, 255, 0.2);
+  gap: 12px;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #b0b0b0;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.stat-item mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: #ffa726;
+}
+
+.stat-highlight {
+  background: rgba(255, 167, 38, 0.1);
+  padding: 6px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 167, 38, 0.3);
+  color: #ffa726 !important;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px !important;
+  background: rgba(15, 52, 96, 0.3);
+  border-top: 2px solid rgba(0, 229, 255, 0.2);
+  gap: 8px;
+}
+
+.action-button {
+  flex: 1;
+  height: 44px !important;
+  font-weight: 600 !important;
+  border-radius: 22px !important;
+  transition: all 0.3s ease;
+  border: 2px solid transparent !important;
+}
+
+.action-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 229, 255, 0.4) !important;
+}
+
+.card-actions button[color="warn"] {
+  flex: none;
+  width: 44px !important;
+  height: 44px !important;
+  border: 2px solid rgba(244, 67, 54, 0.5) !important;
+}
+
+@media (max-width: 768px) {
+  .empresas-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .card-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .action-button {
+    width: 100%;
+  }
+}

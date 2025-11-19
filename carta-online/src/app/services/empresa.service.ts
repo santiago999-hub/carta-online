@@ -14,11 +14,46 @@ export class EmpresaService {
   constructor(private http: HttpClient) {
     if (!localStorage.getItem(this.storageKey)) {
       const seed: Empresa[] = [
-        { id: 1, name: 'La Parrilla Criolla', address: 'Av. Corrientes 1234, CABA', phone: '011-4567-8901', email: 'info@laparrillacriolla.com.ar', logoUrl: '' },
-        { id: 2, name: 'Pizzería Don Antonio', address: 'Av. Santa Fe 2456, CABA', phone: '011-4567-8902', email: 'contacto@donantonio.com.ar', logoUrl: '' },
-        { id: 3, name: 'El Buen Sabor', address: 'Av. Cabildo 3789, CABA', phone: '011-4567-8903', email: 'pedidos@elbuensabor.com.ar', logoUrl: '' },
-        { id: 4, name: 'Café del Centro', address: 'Florida 567, CABA', phone: '011-4567-8904', email: 'hola@cafedelcentro.com.ar', logoUrl: '' },
-        { id: 5, name: 'Sushi Express', address: 'Av. Libertador 5678, CABA', phone: '011-4567-8905', email: 'delivery@sushiexpress.com.ar', logoUrl: '' }
+        { 
+          id: 1, 
+          name: 'La Parrilla Criolla', 
+          address: 'Av. Corrientes 1234, CABA', 
+          phone: '011-4567-8901', 
+          email: 'info@laparrillacriolla.com.ar', 
+          logoUrl: 'https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=200&h=200&fit=crop'
+        },
+        { 
+          id: 2, 
+          name: 'Pizzería Don Antonio', 
+          address: 'Av. Santa Fe 2456, CABA', 
+          phone: '011-4567-8902', 
+          email: 'contacto@donantonio.com.ar', 
+          logoUrl: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=200&h=200&fit=crop'
+        },
+        { 
+          id: 3, 
+          name: 'El Buen Sabor', 
+          address: 'Av. Cabildo 3789, CABA', 
+          phone: '011-4567-8903', 
+          email: 'pedidos@elbuensabor.com.ar', 
+          logoUrl: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=200&h=200&fit=crop'
+        },
+        { 
+          id: 4, 
+          name: 'Café del Centro', 
+          address: 'Florida 567, CABA', 
+          phone: '011-4567-8904', 
+          email: 'hola@cafedelcentro.com.ar', 
+          logoUrl: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=200&h=200&fit=crop'
+        },
+        { 
+          id: 5, 
+          name: 'Sushi Express', 
+          address: 'Av. Libertador 5678, CABA', 
+          phone: '011-4567-8905', 
+          email: 'delivery@sushiexpress.com.ar', 
+          logoUrl: 'https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=200&h=200&fit=crop'
+        }
       ];
       localStorage.setItem(this.storageKey, JSON.stringify(seed));
     }

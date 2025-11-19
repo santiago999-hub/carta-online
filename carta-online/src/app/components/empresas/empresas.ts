@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatCardModule } from '@angular/material/card';
 import { EmpresaService } from '../../services/empresa.service';
 import { Empresa } from '../../models/empresa.model';
 import { RouterModule } from '@angular/router';
@@ -18,7 +19,7 @@ import { fadeIn, slideUp, listAnimation } from '../../shared/animations';
 @Component({
   selector: 'app-empresas',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, FormsModule, RouterModule, MatTooltipModule, MatSnackBarModule],
+  imports: [CommonModule, MatTableModule, MatButtonModule, MatIconModule, MatFormFieldModule, MatInputModule, FormsModule, RouterModule, MatTooltipModule, MatSnackBarModule, MatCardModule],
   templateUrl: './empresas.html',
   styleUrls: ['./empresas.css'],
   animations: [fadeIn, slideUp, listAnimation]
@@ -27,6 +28,8 @@ export class Empresas implements OnInit {
   displayedColumns = ['id', 'name', 'address', 'phone', 'email', 'actions'];
   dataSource = new MatTableDataSource<Empresa>([]);
   filter = '';
+  productos: any[] = [];
+  categorias: any[] = [];
 
   constructor(private empresaService: EmpresaService, private dialog: MatDialog, private snackBar: MatSnackBar) {}
 
@@ -70,5 +73,36 @@ export class Empresas implements OnInit {
     this.empresaService.delete(id);
     this.snackBar.open('🗑️ Empresa eliminada', 'Cerrar', { duration: 3000, horizontalPosition: 'end', verticalPosition: 'top' });
     this.load();
+  }
+
+  // Métodos auxiliares para las cards
+  getProductosPorEmpresa(empresaId: number): number {
+    const ProductoService = (window as any)['ProductoService'];
+    if (!ProductoService) {
+      // Carga perezosa desde localStorage
+      const prods = JSON.parse(localStorage.getItem('productos') || '[]');
+      return prods.filter((p: any) => p.companyId === empresaId).length;
+    }
+    return 0;
+  }
+
+  getCategoriasPorEmpresa(empresaId: number): number {
+    const cats = JSON.parse(localStorage.getItem('categorias') || '[]');
+    return cats.filter((c: any) => c.companyId === empresaId).length;
+  }
+
+  getPrecioPromedioEmpresa(empresaId: number): number {
+    const prods = JSON.parse(localStorage.getItem('productos') || '[]');
+    const productosFiltrados = prods.filter((p: any) => p.companyId === empresaId);
+    if (productosFiltrados.length === 0) return 0;
+    const suma = productosFiltrados.reduce((acc: number, p: any) => acc + p.price, 0);
+    return Math.round(suma / productosFiltrados.length);
+  }
+
+  getPrecioMinimoEmpresa(empresaId: number): number {
+    const prods = JSON.parse(localStorage.getItem('productos') || '[]');
+    const productosFiltrados = prods.filter((p: any) => p.companyId === empresaId);
+    if (productosFiltrados.length === 0) return 0;
+    return Math.min(...productosFiltrados.map((p: any) => p.price));
   }
 }

@@ -17,6 +17,78 @@
     </div>
   </div>
 
+  <!-- Vista de cards atractivas para empresas -->
+  <div class="empresas-grid" *ngIf="dataSource.data.length > 0">
+    <mat-card class="empresa-card" *ngFor="let empresa of dataSource.data">
+      <div class="card-banner">
+        <img [src]="empresa.logoUrl || 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=400&fit=crop'" 
+             alt="{{empresa.name}}" 
+             class="banner-img" />
+        <div class="banner-overlay">
+          <div class="empresa-badge">
+            <mat-icon>restaurant</mat-icon>
+            <span>{{getProductosPorEmpresa(empresa.id)}} productos</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card-header">
+        <div class="logo-container">
+          <img [src]="empresa.logoUrl || 'https://via.placeholder.com/80'" 
+               alt="Logo {{empresa.name}}" 
+               class="empresa-logo" />
+        </div>
+        <div class="empresa-title">
+          <h3>{{empresa.name}}</h3>
+          <div class="precio-badge">
+            <mat-icon>attach_money</mat-icon>
+            <span>Desde ${{getPrecioMinimoEmpresa(empresa.id)}}</span>
+          </div>
+        </div>
+      </div>
+
+      <mat-card-content class="card-content">
+        <div class="info-item">
+          <mat-icon>location_on</mat-icon>
+          <span>{{empresa.address}}</span>
+        </div>
+        <div class="info-item">
+          <mat-icon>phone</mat-icon>
+          <span>{{empresa.phone}}</span>
+        </div>
+        <div class="info-item">
+          <mat-icon>email</mat-icon>
+          <span>{{empresa.email}}</span>
+        </div>
+        
+        <div class="stats-container">
+          <div class="stat-item">
+            <mat-icon>category</mat-icon>
+            <span>{{getCategoriasPorEmpresa(empresa.id)}} categorías</span>
+          </div>
+          <div class="stat-item stat-highlight">
+            <mat-icon>restaurant_menu</mat-icon>
+            <span>Promedio: ${{getPrecioPromedioEmpresa(empresa.id)}}</span>
+          </div>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions class="card-actions">
+        <button mat-raised-button color="primary" (click)="openDialog(empresa)" class="action-button">
+          <mat-icon>edit</mat-icon>
+          Editar
+        </button>
+        <a mat-raised-button color="accent" [routerLink]="['/menu', empresa.id]" class="action-button">
+          <mat-icon>visibility</mat-icon>
+          Ver Carta
+        </a>
+        <button mat-icon-button color="warn" (click)="delete(empresa.id)" matTooltip="Eliminar">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
   <div class="welcome-message" *ngIf="dataSource.data.length === 0 && !filter">
     <div class="welcome-content">
       <mat-icon class="welcome-icon">business_center</mat-icon>
@@ -45,50 +117,4 @@
       </div>
     </div>
   </div>
-
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z2" *ngIf="dataSource.data.length > 0 || filter">
-
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> Id </th>
-      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Nombre </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="address">
-      <th mat-header-cell *matHeaderCellDef> Dirección </th>
-      <td mat-cell *matCellDef="let element"> {{element.address}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="phone">
-      <th mat-header-cell *matHeaderCellDef> Teléfono </th>
-      <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef> Email </th>
-      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef> Acciones </th>
-      <td mat-cell *matCellDef="let element" class="actions-cell">
-        <button mat-mini-fab color="primary" (click)="openDialog(element)" matTooltip="Editar empresa" class="action-btn">
-          <mat-icon>edit</mat-icon>
-        </button>
-        <a mat-mini-fab color="accent" [routerLink]="['/menu', element.id]" matTooltip="Ver carta pública" class="action-btn">
-          <mat-icon>restaurant_menu</mat-icon>
-        </a>
-        <button mat-mini-fab color="warn" (click)="delete(element.id)" matTooltip="Eliminar empresa" class="action-btn">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
 </div>

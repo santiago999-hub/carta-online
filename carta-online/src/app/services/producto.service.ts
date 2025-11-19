@@ -111,7 +111,69 @@ export class ProductoService {
         { id: 70, name: 'Combo Familiar', description: '60 piezas variadas', price: 17500, categoryId: 24, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1583623025817-d180a2221d0a?w=400&h=300&fit=crop' },
         // Sushi Express - Bebidas
         { id: 71, name: 'Té verde japonés', description: 'Caliente', price: 1200, categoryId: 25, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&h=300&fit=crop' },
-        { id: 72, name: 'Sake frío', description: '250ml', price: 3500, categoryId: 25, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400&h=300&fit=crop' }
+        { id: 72, name: 'Sake frío', description: '250ml', price: 3500, categoryId: 25, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400&h=300&fit=crop' },
+
+        // La Parrilla Criolla - Más productos
+        { id: 73, name: 'Costillas de cerdo', description: 'Costillas BBQ con papas rústicas', price: 7800, categoryId: 2, companyId: 1, imageUrl: 'https://images.unsplash.com/photo-1544025162-d76694265947?w=400&h=300&fit=crop' },
+        { id: 74, name: 'Matambre a la pizza', description: 'Con muzzarella y salsa', price: 6500, categoryId: 2, companyId: 1, imageUrl: 'https://images.unsplash.com/photo-1558030006-450675393462?w=400&h=300&fit=crop' },
+        { id: 75, name: 'Mollejas a la parrilla', description: 'Con ensalada y limón', price: 5200, categoryId: 2, companyId: 1, imageUrl: 'https://images.unsplash.com/photo-1600891964092-4316c288032e?w=400&h=300&fit=crop' },
+        { id: 76, name: 'Picada criolla', description: 'Chorizo, morcilla, queso y aceitunas', price: 4500, categoryId: 1, companyId: 1, imageUrl: 'https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=400&h=300&fit=crop' },
+        { id: 77, name: 'Empanadas criollas x12', description: 'Carne cortada a cuchillo', price: 7200, categoryId: 1, companyId: 1, imageUrl: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&h=300&fit=crop' },
+        { id: 78, name: 'Papas fritas grandes', description: 'Porción abundante', price: 2000, categoryId: 3, companyId: 1, imageUrl: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=300&fit=crop' },
+        { id: 79, name: 'Vino tinto Malbec', description: 'Botella 750ml', price: 4500, categoryId: 5, companyId: 1, imageUrl: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=400&h=300&fit=crop' },
+        { id: 80, name: 'Chocotorta casera', description: 'Porción generosa', price: 2400, categoryId: 4, companyId: 1, imageUrl: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop' },
+
+        // Pizzería Don Antonio - Más productos
+        { id: 81, name: 'Pizza Cuatro Quesos', description: 'Muzzarella, roquefort, parmesano y fontina', price: 6800, categoryId: 6, companyId: 2, imageUrl: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=300&fit=crop' },
+        { id: 82, name: 'Pizza Margarita', description: 'Salsa, muzzarella, tomate y albahaca', price: 5500, categoryId: 6, companyId: 2, imageUrl: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400&h=300&fit=crop' },
+        { id: 83, name: 'Calzone napolitano', description: 'Pizza cerrada con jamón y muzzarella', price: 5200, categoryId: 6, companyId: 2, imageUrl: 'https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?w=400&h=300&fit=crop' },
+        { id: 84, name: 'Fainá porción', description: 'Masa de garbanzos crocante', price: 800, categoryId: 6, companyId: 2, imageUrl: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=300&fit=crop' },
+        { id: 85, name: 'Empanada de verdura', description: 'Espinaca y queso', price: 550, categoryId: 7, companyId: 2, imageUrl: 'https://images.unsplash.com/photo-1623428187969-5da2dcea5ebf?w=400&h=300&fit=crop' },
+        { id: 86, name: 'Docena empanadas mixtas', description: '12 empanadas variadas', price: 6600, categoryId: 7, companyId: 2, imageUrl: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&h=300&fit=crop' },
+        { id: 87, name: 'Canelones de ricota', description: 'Con salsa fileto', price: 4000, categoryId: 8, companyId: 2, imageUrl: 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400&h=300&fit=crop' },
+        { id: 88, name: 'Lasagna de carne', description: 'Con bechamel y bolognesa', price: 4800, categoryId: 8, companyId: 2, imageUrl: 'https://images.unsplash.com/photo-1619895092538-128341789043?w=400&h=300&fit=crop' },
+        { id: 89, name: 'Fernet con Coca', description: 'Bebida preparada 1L', price: 3200, categoryId: 10, companyId: 2, imageUrl: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=400&h=300&fit=crop' },
+        { id: 90, name: 'Cheesecake', description: 'Con frutos rojos', price: 2800, categoryId: 9, companyId: 2, imageUrl: 'https://images.unsplash.com/photo-1533134486753-c833f0ed4866?w=400&h=300&fit=crop' },
+
+        // El Buen Sabor - Más productos
+        { id: 91, name: 'Milanesa de pollo', description: 'Con ensalada y papas', price: 4000, categoryId: 11, companyId: 3, imageUrl: 'https://images.unsplash.com/photo-1625937286074-9ca519d5d9df?w=400&h=300&fit=crop' },
+        { id: 92, name: 'Bife a caballo', description: 'Bife de chorizo con huevos fritos', price: 6800, categoryId: 11, companyId: 3, imageUrl: 'https://images.unsplash.com/photo-1600891964092-4316c288032e?w=400&h=300&fit=crop' },
+        { id: 93, name: 'Pollo grillado', description: 'Con ensalada mixta', price: 4500, categoryId: 11, companyId: 3, imageUrl: 'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=400&h=300&fit=crop' },
+        { id: 94, name: 'Papas con cheddar y bacon', description: 'Porción grande', price: 3200, categoryId: 11, companyId: 3, imageUrl: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=300&fit=crop' },
+        { id: 95, name: 'Pancho completo', description: 'Con papas fritas', price: 2500, categoryId: 12, companyId: 3, imageUrl: 'https://images.unsplash.com/photo-1612392062798-2dbce778c076?w=400&h=300&fit=crop' },
+        { id: 96, name: 'Sándwich club', description: 'Triple con pollo, bacon y huevo', price: 4200, categoryId: 12, companyId: 3, imageUrl: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400&h=300&fit=crop' },
+        { id: 97, name: 'Nuggets de pollo x8', description: 'Con papas y salsas', price: 3500, categoryId: 11, companyId: 3, imageUrl: 'https://images.unsplash.com/photo-1562967914-608f82629710?w=400&h=300&fit=crop' },
+        { id: 98, name: 'Café expreso doble', description: 'Café fuerte', price: 1400, categoryId: 15, companyId: 3, imageUrl: 'https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=400&h=300&fit=crop' },
+        { id: 99, name: 'Brownie con helado', description: 'Caliente con helado de vainilla', price: 2500, categoryId: 14, companyId: 3, imageUrl: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400&h=300&fit=crop' },
+        { id: 100, name: 'Limonada natural', description: '500ml', price: 1200, categoryId: 15, companyId: 3, imageUrl: 'https://images.unsplash.com/photo-1523677011781-c91d1bbe2f8d?w=400&h=300&fit=crop' },
+
+        // Café del Centro - Más productos
+        { id: 101, name: 'Flat White', description: 'Café con microespuma', price: 1900, categoryId: 16, companyId: 4, imageUrl: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=300&fit=crop' },
+        { id: 102, name: 'Café americano', description: 'Expreso con agua', price: 1400, categoryId: 16, companyId: 4, imageUrl: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=300&fit=crop' },
+        { id: 103, name: 'Mochaccino', description: 'Café con chocolate', price: 2000, categoryId: 16, companyId: 4, imageUrl: 'https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?w=400&h=300&fit=crop' },
+        { id: 104, name: 'Té chai latte', description: 'Especiado con leche', price: 1800, categoryId: 16, companyId: 4, imageUrl: 'https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=400&h=300&fit=crop' },
+        { id: 105, name: 'Budín de limón', description: 'Porción con glaseado', price: 1600, categoryId: 17, companyId: 4, imageUrl: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop' },
+        { id: 106, name: 'Scones x2', description: 'Con mermelada y crema', price: 1700, categoryId: 17, companyId: 4, imageUrl: 'https://images.unsplash.com/photo-1612203985729-70726954388c?w=400&h=300&fit=crop' },
+        { id: 107, name: 'Muffin de arándanos', description: 'Recién horneado', price: 1400, categoryId: 17, companyId: 4, imageUrl: 'https://images.unsplash.com/photo-1607958996333-41aef7caefaa?w=400&h=300&fit=crop' },
+        { id: 108, name: 'Tostado veggie', description: 'Verduras grilladas y queso', price: 2400, categoryId: 18, companyId: 4, imageUrl: 'https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400&h=300&fit=crop' },
+        { id: 109, name: 'Smoothie de frutas', description: 'Frutilla, banana y mango', price: 2000, categoryId: 19, companyId: 4, imageUrl: 'https://images.unsplash.com/photo-1577805947697-89e18249d767?w=400&h=300&fit=crop' },
+        { id: 110, name: 'Lemon pie', description: 'Porción individual', price: 2200, categoryId: 20, companyId: 4, imageUrl: 'https://images.unsplash.com/photo-1519915212116-7cfef71f1d3e?w=400&h=300&fit=crop' },
+        { id: 111, name: 'Brownie triple chocolate', description: 'Con nueces', price: 1900, categoryId: 20, companyId: 4, imageUrl: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400&h=300&fit=crop' },
+        { id: 112, name: 'Batido de chocolate', description: 'Con crema', price: 1800, categoryId: 19, companyId: 4, imageUrl: 'https://images.unsplash.com/photo-1568471173238-64e0b3ddc27e?w=400&h=300&fit=crop' },
+
+        // Sushi Express - Más productos
+        { id: 113, name: 'Rainbow Roll', description: '10 piezas - Roll mixto con pescados variados', price: 6800, categoryId: 21, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=400&h=300&fit=crop' },
+        { id: 114, name: 'Tempura Roll', description: '10 piezas - Langostino tempura con aguacate', price: 5800, categoryId: 21, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1580822184713-fc5400e7fe10?w=400&h=300&fit=crop' },
+        { id: 115, name: 'Salmon Skin Roll', description: '10 piezas - Piel de salmón crocante', price: 4800, categoryId: 21, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1564489563601-c53cfc451e93?w=400&h=300&fit=crop' },
+        { id: 116, name: 'Nigiri de anguila', description: '2 piezas con salsa teriyaki', price: 2400, categoryId: 22, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=400&h=300&fit=crop' },
+        { id: 117, name: 'Nigiri de pulpo', description: '2 piezas', price: 2100, categoryId: 22, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1534604973900-c43ab4c2e0ab?w=400&h=300&fit=crop' },
+        { id: 118, name: 'Sashimi premium', description: 'Salmón, atún y pez mantequilla - 12 piezas', price: 6800, categoryId: 23, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1611143669185-af224c5e3252?w=400&h=300&fit=crop' },
+        { id: 119, name: 'Combo Ejecutivo', description: '25 piezas + sopa miso', price: 7800, categoryId: 24, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=400&h=300&fit=crop' },
+        { id: 120, name: 'Combo Premium', description: '50 piezas variadas + gyozas', price: 14500, categoryId: 24, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1583623025817-d180a2221d0a?w=400&h=300&fit=crop' },
+        { id: 121, name: 'Gyozas x6', description: 'Empanaditas japonesas de cerdo', price: 3200, categoryId: 24, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=400&h=300&fit=crop' },
+        { id: 122, name: 'Sopa miso', description: 'Con tofu y algas', price: 1500, categoryId: 25, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1562158147-f45edb65c5e0?w=400&h=300&fit=crop' },
+        { id: 123, name: 'Cerveza Asahi', description: '330ml', price: 2800, categoryId: 25, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1608270586620-248524c67de9?w=400&h=300&fit=crop' },
+        { id: 124, name: 'Ramune', description: 'Gaseosa japonesa', price: 1800, categoryId: 25, companyId: 5, imageUrl: 'https://images.unsplash.com/photo-1629203851122-3726ecdf080e?w=400&h=300&fit=crop' }
       ];
       localStorage.setItem(this.storageKey, JSON.stringify(seed));
     }
