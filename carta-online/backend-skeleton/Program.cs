@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using CartaOnline.Backend;
+using CartaOnline.Backend.Repositories;
+using CartaOnline.Backend.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,14 +11,23 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection") 
-        ?? "Server=(localdb)\\mssqllocaldb;Database=CartaOnlineDB;Trusted_Connection=True;"
+        ?? "Server=(localdb)\\mssqllocaldb;Database=CartaOnlineDB;Trusted_Connection=True;TrustServerCertificate=True;"
     )
 );
 
-// 2. Controllers
-builder.Services.AddControllers();
+// 2. Repositorios (Patrón Repository)
+builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
-// 3. CORS - permitir requests desde el frontend Angular
+// 3. Controllers
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+    });
+
+// 4. CORS - permitir requests desde el frontend Angular
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
@@ -29,9 +40,22 @@ builder.Services.AddCors(options =>
     });
 });
 
-// 4. Swagger/OpenAPI (opcional, util para documentación)
+// 5. Manejo global de excepciones
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
+
+// 6. Swagger/OpenAPI con mejor documentación
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new() 
+    { 
+        Title = "Carta Online API", 
+        Version = "v1",
+        Description = "API REST para sistema de gestión multiempresa de menús digitales",
+        Contact = new() { Name = "Carta Online", Email = "contacto@cartaonline.com" }
+    });
+});
 
 // ========== PIPELINE ==========
 
@@ -55,8 +79,15 @@ using (var scope = app.Services.CreateScope())
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Carta Online API v1");
+        c.RoutePrefix = "swagger";
+    });
 }
+
+// Manejo global de excepciones
+app.UseExceptionHandler();
 
 app.UseHttpsRedirection();
 
@@ -68,12 +99,24 @@ app.UseAuthorization();
 // Mapear controllers
 app.MapControllers();
 
-// Health check endpoint (opcional)
-app.MapGet("/health", () => new { status = "ok", timestamp = DateTime.UtcNow })
-    .WithName("Health")
-    .WithOpenApi();
+// Health check endpoint mejorado
+app.MapGet("/api/health", () => new 
+{ 
+    status = "healthy", 
+    timestamp = DateTime.UtcNow,
+    version = "1.0.0",
+    environment = app.Environment.EnvironmentName
+})
+.WithName("HealthCheck")
+.WithTags("Monitoring")
+.WithOpenApi();
 
 // ========== INICIAR ==========
 
-Console.WriteLine("Iniciando servidor en http://localhost:5230 (HTTPS: https://localhost:7230)");
+var logger = app.Services.GetRequiredService<ILogger<Program>>();
+logger.LogInformation("🚀 Iniciando Carta Online API v1.0");
+logger.LogInformation("📍 HTTP: http://localhost:5230");
+logger.LogInformation("📍 HTTPS: https://localhost:7230");
+logger.LogInformation("📚 Swagger: http://localhost:5230/swagger");
+
 app.Run();

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CartaOnline.Backend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2ab74ed982b8ed50d47753c4dda4c5aeb730b879")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3216b0839faced49584a93fb854ccef8fc58f385")]
 [assembly: System.Reflection.AssemblyProductAttribute("CartaOnline.Backend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CartaOnline.Backend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
