@@ -3,10 +3,14 @@
     <mat-icon>arrow_back</mat-icon>
   </button>
   <div class="empresa-info">
-    <img *ngIf="empresa?.logoUrl" [src]="empresa?.logoUrl" alt="Logo" class="logo" />
+    @if (empresa?.logoUrl) {
+      <img [src]="empresa?.logoUrl" alt="Logo" class="logo" />
+    }
     <div>
       <h1 class="empresa-name">{{ empresa?.name || 'Carta Menú' }}</h1>
-      <p class="empresa-subtitle" *ngIf="empresa?.address">{{ empresa?.address }}</p>
+      @if (empresa?.address) {
+        <p class="empresa-subtitle">{{ empresa?.address }}</p>
+      }
     </div>
   </div>
   <span class="spacer"></span>
@@ -24,71 +28,91 @@
   </button>
 </mat-toolbar>
 
-<div class="container" *ngIf="!cargando">
-  <div *ngIf="!empresa" class="no-encontrada">
-    <mat-card class="error-card">
-      <mat-card-title>Empresa no encontrada</mat-card-title>
-      <mat-card-content>
-        <p>No pudimos encontrar la empresa solicitada. Intenta nuevamente desde el menú principal.</p>
-      </mat-card-content>
-    </mat-card>
-  </div>
+@if (!cargando) {
+  <div class="container">
+    @if (!empresa) {
+      <div class="no-encontrada">
+        <mat-card class="error-card">
+          <mat-card-title>Empresa no encontrada</mat-card-title>
+          <mat-card-content>
+            <p>No pudimos encontrar la empresa solicitada. Intenta nuevamente desde el menú principal.</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    }
 
-  <div *ngIf="empresa && categorias.length === 0" class="sin-productos">
-    <mat-card class="info-card">
-      <mat-card-title>Sin productos disponibles</mat-card-title>
-      <mat-card-content>
-        <p>Esta empresa aún no tiene productos registrados.</p>
-      </mat-card-content>
-    </mat-card>
-  </div>
+    @if (empresa && categorias.length === 0) {
+      <div class="sin-productos">
+        <mat-card class="info-card">
+          <mat-card-title>Sin productos disponibles</mat-card-title>
+          <mat-card-content>
+            <p>Esta empresa aún no tiene productos registrados.</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    }
 
-  <div *ngFor="let categoria of categorias; let last = last" class="categoria-section">
-    <div class="categoria-header">
-      <h2 class="categoria-title">{{ categoria.name }}</h2>
-      <div class="producto-count">{{ categoria.productos.length }} producto(s)</div>
-    </div>
-
-    <div class="productos-grid">
-      <mat-card *ngFor="let producto of categoria.productos" class="producto-card">
-        <div class="producto-image-container" *ngIf="producto.imageUrl">
-          <img [src]="producto.imageUrl" alt="{{ producto.name }}" class="producto-image" />
-        </div>
-        <div class="producto-image-placeholder" *ngIf="!producto.imageUrl">
-          <mat-icon>fastfood</mat-icon>
+    @for (categoria of categorias; track categoria.id; let last = $last) {
+      <div class="categoria-section">
+        <div class="categoria-header">
+          <h2 class="categoria-title">{{ categoria.name }}</h2>
+          <div class="producto-count">{{ categoria.productos.length }} producto(s)</div>
         </div>
 
-        <mat-card-header class="producto-header">
-          <mat-card-title class="producto-nombre">{{ producto.name }}</mat-card-title>
-          <div class="producto-precio">{{ producto.price | currency: 'ARS' }}</div>
-        </mat-card-header>
+        <div class="productos-grid">
+          @for (producto of categoria.productos; track producto.id) {
+            <mat-card class="producto-card">
+              @if (producto.imageUrl) {
+                <div class="producto-image-container">
+                  <img [src]="producto.imageUrl" alt="{{ producto.name }}" class="producto-image" />
+                </div>
+              }
+              @if (!producto.imageUrl) {
+                <div class="producto-image-placeholder">
+                  <mat-icon>fastfood</mat-icon>
+                </div>
+              }
 
-        <mat-card-content class="producto-content">
-          <p class="producto-descripcion" *ngIf="producto.description">
-            {{ producto.description }}
-          </p>
-        </mat-card-content>
+              <mat-card-header class="producto-header">
+                <mat-card-title class="producto-nombre">{{ producto.name }}</mat-card-title>
+                <div class="producto-precio">{{ producto.price | currency: 'ARS' }}</div>
+              </mat-card-header>
 
-        <mat-card-actions class="producto-actions">
-          <button
-            mat-raised-button
-            color="primary"
-            (click)="agregarAlCarrito(producto)"
-            class="btn-agregar"
-          >
-            <mat-icon>add_shopping_cart</mat-icon>
-            Agregar
-          </button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
+              <mat-card-content class="producto-content">
+                @if (producto.description) {
+                  <p class="producto-descripcion">
+                    {{ producto.description }}
+                  </p>
+                }
+              </mat-card-content>
 
-    <mat-divider *ngIf="!last" class="categoria-divider"></mat-divider>
+              <mat-card-actions class="producto-actions">
+                <button
+                  mat-raised-button
+                  color="primary"
+                  (click)="agregarAlCarrito(producto)"
+                  class="btn-agregar"
+                >
+                  <mat-icon>add_shopping_cart</mat-icon>
+                  Agregar
+                </button>
+              </mat-card-actions>
+            </mat-card>
+          }
+        </div>
+
+        @if (!last) {
+          <mat-divider class="categoria-divider"></mat-divider>
+        }
+      </div>
+    }
   </div>
-</div>
+}
 
-<div *ngIf="cargando" class="cargando">
-  <div class="spinner"></div>
-  <p>Cargando menú...</p>
-</div>
+@if (cargando) {
+  <div class="cargando">
+    <div class="spinner"></div>
+    <p>Cargando menú...</p>
+  </div>
+}
 

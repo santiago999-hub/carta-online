@@ -3,7 +3,9 @@
     <button mat-mini-fab color="accent" (click)="volver()" matTooltip="Volver" class="back-btn">
       <mat-icon>arrow_back</mat-icon>
     </button>
-    <img *ngIf="empresa?.logoUrl" [src]="empresa?.logoUrl" alt="logo" class="logo-img" />
+    @if (empresa?.logoUrl) {
+      <img [src]="empresa?.logoUrl" alt="logo" class="logo-img" />
+    }
     <div class="empresa-info">
       <span class="empresa-nombre">{{ empresa?.name || 'Carta' }}</span>
       <span class="empresa-subtitulo">Menú Digital</span>
@@ -37,67 +39,89 @@
   </div>
 </mat-toolbar>
 
-<div class="menu-container" *ngIf="!cargando">
-  <div *ngIf="!empresa">
-    <mat-card>
-      <mat-card-title>Empresa no encontrada</mat-card-title>
-      <mat-card-content>La empresa solicitada no existe o fue eliminada.</mat-card-content>
-    </mat-card>
-  </div>
-
-  <div *ngIf="empresa">
-    <div class="summary">
-      <span>Productos encontrados: <strong>{{ productosFiltrados.length }}</strong></span>
-    </div>
-
-    <div *ngIf="productosFiltrados.length === 0" class="empty-state" @fadeIn>
-      <mat-card class="empty-state-card" @scaleIn>
-        <div class="empty-icon">
-          <mat-icon>restaurant</mat-icon>
-        </div>
-        <mat-card-title>No se encontraron productos</mat-card-title>
-        <mat-card-content>
-          <p *ngIf="search || selectedCategoriaId">Intentá con otros filtros de búsqueda</p>
-          <p *ngIf="!search && !selectedCategoriaId">Esta empresa aún no tiene productos disponibles</p>
-        </mat-card-content>
-        <mat-card-actions *ngIf="search || selectedCategoriaId">
-          <button mat-raised-button color="primary" (click)="limpiarFiltros()">
-            <mat-icon>clear</mat-icon>
-            Limpiar filtros
-          </button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
-
-    <div *ngFor="let entry of (agrupadoPorCategoria | keyvalue)">
-      <mat-divider></mat-divider>
-      <h3 class="categoria-title">{{ entry.key }}</h3>
-
-      <div class="grid">
-        <mat-card class="product-card" *ngFor="let p of entry.value" @cardAnimation>
-          <div class="card-image-container">
-            <img *ngIf="p.imageUrl" [src]="p.imageUrl" class="product-img" alt="{{p.name}}" />
-            <div *ngIf="!p.imageUrl" class="product-img-placeholder">
-              <mat-icon>restaurant</mat-icon>
-            </div>
-          </div>
-          <div class="card-content">
-            <mat-card-title class="product-name">{{ p.name }}</mat-card-title>
-            <mat-card-content>
-              <p class="desc">{{ p.description }}</p>
-              <div class="price-container">
-                <span class="price">{{ p.price | currency:'ARS':'symbol-narrow':'1.0-0' }}</span>
-              </div>
-            </mat-card-content>
-            <mat-card-actions class="card-actions">
-              <button mat-raised-button color="primary" (click)="agregarAlCarrito(p)" class="add-to-cart-btn">
-                <mat-icon>add_shopping_cart</mat-icon>
-                Agregar al Carrito
-              </button>
-            </mat-card-actions>
-          </div>
+@if (!cargando) {
+  <div class="menu-container">
+    @if (!empresa) {
+      <div>
+        <mat-card>
+          <mat-card-title>Empresa no encontrada</mat-card-title>
+          <mat-card-content>La empresa solicitada no existe o fue eliminada.</mat-card-content>
         </mat-card>
       </div>
-    </div>
+    }
+
+    @if (empresa) {
+      <div>
+        <div class="summary">
+          <span>Productos encontrados: <strong>{{ productosFiltrados.length }}</strong></span>
+        </div>
+
+        @if (productosFiltrados.length === 0) {
+          <div class="empty-state" @fadeIn>
+            <mat-card class="empty-state-card" @scaleIn>
+              <div class="empty-icon">
+                <mat-icon>restaurant</mat-icon>
+              </div>
+              <mat-card-title>No se encontraron productos</mat-card-title>
+              <mat-card-content>
+                @if (search || selectedCategoriaId) {
+                  <p>Intentá con otros filtros de búsqueda</p>
+                }
+                @if (!search && !selectedCategoriaId) {
+                  <p>Esta empresa aún no tiene productos disponibles</p>
+                }
+              </mat-card-content>
+              @if (search || selectedCategoriaId) {
+                <mat-card-actions>
+                  <button mat-raised-button color="primary" (click)="limpiarFiltros()">
+                    <mat-icon>clear</mat-icon>
+                    Limpiar filtros
+                  </button>
+                </mat-card-actions>
+              }
+            </mat-card>
+          </div>
+        }
+
+        @for (entry of (agrupadoPorCategoria | keyvalue); track entry.key) {
+          <div>
+            <mat-divider></mat-divider>
+            <h3 class="categoria-title">{{ entry.key }}</h3>
+
+            <div class="grid">
+              @for (p of entry.value; track p.id) {
+                <mat-card class="product-card" @cardAnimation>
+                  <div class="card-image-container">
+                    @if (p.imageUrl) {
+                      <img [src]="p.imageUrl" class="product-img" alt="{{p.name}}" />
+                    }
+                    @if (!p.imageUrl) {
+                      <div class="product-img-placeholder">
+                        <mat-icon>restaurant</mat-icon>
+                      </div>
+                    }
+                  </div>
+                  <div class="card-content">
+                    <mat-card-title class="product-name">{{ p.name }}</mat-card-title>
+                    <mat-card-content>
+                      <p class="desc">{{ p.description }}</p>
+                      <div class="price-container">
+                        <span class="price">{{ p.price | currency:'ARS':'symbol-narrow':'1.0-0' }}</span>
+                      </div>
+                    </mat-card-content>
+                    <mat-card-actions class="card-actions">
+                      <button mat-raised-button color="primary" (click)="agregarAlCarrito(p)" class="add-to-cart-btn">
+                        <mat-icon>add_shopping_cart</mat-icon>
+                        Agregar al Carrito
+                      </button>
+                    </mat-card-actions>
+                  </div>
+                </mat-card>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    }
   </div>
-</div>
+}
